@@ -1,0 +1,20 @@
+name: lges
+args: []
+kwargs: {}
+
+dataset:
+  _target_: "datasets.lges_dset.load_lges_slice_train_val"
+  data_path: ${oc.env:DATASET_DIR}/sim/episodes
+  n_rollout: null
+  normalize_action: ${normalize_action}
+  split_ratio: 0.9
+  frame: base          # cup tip actions / proprio in base_link ("table": the table frame)
+  drop_legs: true      # trajectories end at a chassis leg and start again after it
+  with_force: false    # add the wrist Fz to the proprio
+  frame_lag: 1.0       # the sim renderer's picture is one frame (0.2 s) behind the time it was read (measured 2026-11-05)
+  transform:
+    _target_: "datasets.lges_dset.squash_transform"
+    img_size: ${img_size}
+
+decoder_path: null
+num_workers: 8

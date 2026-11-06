@@ -534,6 +534,7 @@ class Trainer:
             loss_components = {f"train_{k}": [v] for k, v in loss_components.items()}
             self.logs_update(loss_components)
 
+    @torch.no_grad()  # LGES: upstream ran validation with autograd on; the forward graph + LPIPS/plots OOMed a 16 GB GPU
     def val(self):
         self.model.eval()
         if len(self.train_traj_dset) > 0 and self.cfg.has_predictor:

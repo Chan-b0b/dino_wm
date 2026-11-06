@@ -2,3 +2,9 @@ __pycache__
 *.pyc
 outputs
 plan_outputs
+
+# LGES (local only): venv, DINOv2 weight cache, offline wandb runs, Claude Code state
+.venv/
+.torch_home/
+wandb/
+.claude/
